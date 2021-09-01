@@ -2,24 +2,36 @@ import React from "react";
 
 type StarType = {
     selected: boolean
+    setRating: () => void
 }
+
+export type RatingValueType = 1 | 2 | 3 | 4 | 5
 
 type RatingType = {
-    rating: 1 | 2 | 3 | 4 | 5
+    rating: RatingValueType
+    setRating: (rating: RatingValueType) => void
 }
 
-export function Rating(props:RatingType) {
-    return <>
+type StarsElementsType = Array<JSX.Element>
+
+export function Rating(props: RatingType) {
+    const getStars = (ratingCount: RatingValueType): StarsElementsType => {
+        const stars: StarsElementsType = []
+        for (let i: RatingValueType = 1; i <= ratingCount; i++) {
+            stars.push(<Star selected={props.rating >= i} key={i} setRating={() => props.setRating(i)}/>)
+        }
+        return stars
+    }
+    const stars = getStars(5)
+
+    return (
         <div>
-            <Star selected={props.rating >= 1}/>
-            <Star selected={props.rating >= 2}/>
-            <Star selected={props.rating >= 3}/>
-            <Star selected={props.rating >= 4}/>
-            <Star selected={props.rating === 5}/>
+            {stars}
         </div>
-    </>
+    )
 }
 
-function Star(props:StarType) {
-    return props.selected? <span><b>star </b></span> : <span>star </span>
+function Star(props: StarType) {
+    const selectedStyle = {fontWeight: props.selected ? 700 : 400}
+    return <span style={selectedStyle} onClick={() => props.setRating()}> star </span>
 }

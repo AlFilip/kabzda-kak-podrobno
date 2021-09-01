@@ -13,11 +13,12 @@ type StarType = {
 
 export function UnControlledRating() {
     const [rating, setRating] = useState(3)
-    const getRatingLength = (len: number) => Array.from({length: len}, (_, i) => i + 1)
-    const stars = getRatingLength(5).map(item => <Star selected={rating >= item}
+    const getStarsNumbersArr = (len: number) => Array.from({length: len}, (_, i) => i + 1)
+    const stars = getStarsNumbersArr(5).map(item => <Star selected={rating >= item}
                                                        id={item}
                                                        key={item}
                                                        setRating={setRating}/>)
+
     return (
         <div>
             {stars}

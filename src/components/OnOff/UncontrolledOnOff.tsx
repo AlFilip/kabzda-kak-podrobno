@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 
-type OnOffType = {
-    isOn: boolean
-    setOn: (value:boolean) => void
-}
+// type OnOffType = {
+//     on: boolean
+// }
 
-function OnOff ({isOn, setOn}: OnOffType):JSX.Element {
+
+function OnOff () {
+    const [isOn, setOn] = useState(true);
 
     const onStyle = {
         display: 'inline-block',
@@ -31,6 +32,7 @@ function OnOff ({isOn, setOn}: OnOffType):JSX.Element {
         backgroundColor: isOn ? 'green' : 'red'
     }
 
+    console.log('render');
     return (
         <div>
             <span onClick={()=> setOn(true)} style={onStyle}>On</span>
