@@ -5,7 +5,7 @@ type AccordionTitleType = {
     setCollapsed: () => void
 }
 
-type AccordionType = {
+export type AccordionType = {
     title: string
     collapsed: boolean
     setCollapsed: () => void
@@ -20,11 +20,11 @@ export function Accordion(props:AccordionType) {
     )
 }
 
-function AccordionTitle(props:AccordionTitleType) {
+export function AccordionTitle(props:AccordionTitleType) {
     return <h3 onClick={props.setCollapsed}>{props.title}</h3>
 }
 
-function AccordionBody() {
+export function AccordionBody() {
     return (
         <ul>
             <li>1</li>

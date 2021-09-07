@@ -1,6 +1,6 @@
 import React from "react";
 
-type OnOffType = {
+export type OnOffType = {
     isOn: boolean
     setOn: (value:boolean) => void
 }

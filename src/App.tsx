@@ -17,7 +17,7 @@ function App() {
             <Rating rating={rating} setRating={setRating}/>
             {/*<UnControlledRating/>*/}
             <Accordion title={'Menu'} collapsed={accordionCollapsed}
-                       setCollapsed={() => setAccordionCollapsed(!accordionCollapsed)}/>
+                            setCollapsed={() => setAccordionCollapsed(!accordionCollapsed)}/>
             {/*<UnControlledAccordion title={'ShMenu'} />*/}
             <OnOff isOn={isToggleOn} setOn={setToggle} />
         </div>

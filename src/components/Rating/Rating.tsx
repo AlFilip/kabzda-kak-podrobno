@@ -1,6 +1,6 @@
 import React from "react";
 
-type StarType = {
+export type StarType = {
     selected: boolean
     setRating: () => void
 }
@@ -14,7 +14,7 @@ type RatingType = {
 
 type StarsElementsType = Array<JSX.Element>
 
-export function Rating(props: RatingType) {
+export function Rating(props: RatingType): JSX.Element {
     const getStars = (ratingCount: RatingValueType): StarsElementsType => {
         const stars: StarsElementsType = []
         for (let i: RatingValueType = 1; i <= ratingCount; i++) {
@@ -31,7 +31,7 @@ export function Rating(props: RatingType) {
     )
 }
 
-function Star(props: StarType) {
+export function Star(props: StarType): JSX.Element {
     const selectedStyle = {fontWeight: props.selected ? 700 : 400}
     return <span style={selectedStyle} onClick={() => props.setRating()}> star </span>
 }
