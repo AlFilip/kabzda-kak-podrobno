@@ -7,7 +7,7 @@ import {action} from "@storybook/addon-actions";
 
 export default {
     component: Accordion,
-    title: 'Accordion',
+    title: 'Components/Accordion',
 } as Meta;
 
 export const AccordionBodyNotCollapsedMode = () => <AccordionBody />

@@ -7,7 +7,7 @@ import {action} from "@storybook/addon-actions";
 
 export default {
     component: AccordionTitle,
-    title: 'AccordionTitle',
+    title: 'Components/Accordion',
 } as Meta;
 
 const callback = action('Click on header')

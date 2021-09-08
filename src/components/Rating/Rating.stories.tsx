@@ -2,22 +2,41 @@
 
 import React, {useState} from 'react'
 
-import {Meta} from '@storybook/react';
+import {Meta, Story} from '@storybook/react';
 
-import {Rating, RatingValueType} from './Rating';
+import {Rating, RatingType, RatingValueType} from './Rating';
+
+export const getCategory = (categoryName: string) => ({
+    table: {
+        category: categoryName
+    }
+})
 
 export default {
     component: Rating,
-    title: 'Rating',
+    title: 'Components/Rating/Rating',
+    argTypes: {
+        "Click on stars to change rating": {
+            ...getCategory('Description')
+        },
+        rating: {
+            options: [1, 2, 3, 4, 5],
+            control: {type: 'inline-radio'},
+            ...getCategory('Main')
+        },
+        setRating: {
+            ...getCategory('Callbacks')
+        },
+    }
 } as Meta;
 
-export const Rating1 = () => <Rating rating={1} setRating={x => x}/>
-export const Rating2 = () => <Rating rating={2} setRating={x => x}/>
-export const Rating3 = () => <Rating rating={3} setRating={x => x}/>
-export const Rating4 = () => <Rating rating={4} setRating={x => x}/>
-export const Rating5 = () => <Rating rating={5} setRating={x => x}/>
-export const ChangeRating = () => {
+export const ChangingRatingOnClickMode: Story<RatingType> = (args) => {
     const [rating, setRating] = useState<RatingValueType>(1)
     return <Rating rating={rating} setRating={setRating}/>
 }
 
+export const ChangingRatingMode: Story<RatingType> = (args) => <Rating {...args}/>
+ChangingRatingMode.args = {
+    rating: 1,
+    setRating: rating => undefined
+}

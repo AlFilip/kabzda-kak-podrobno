@@ -5,18 +5,26 @@ import React from "react";
 
 export default {
     component: Star,
-    title: 'Star'
+    title: 'Components/Rating/Star',
 } as Meta
 
 const callback = action('Click')
 
-export const StarActiveMode = () => <Star selected={true} setRating={callback} />
-export const StarNotActiveMode = () => <Star selected={false} setRating={callback} />
 
 const Template: Story<StarType> = args => <Star {...args}/>
 
+export const StarActiveMode = Template.bind({})
+StarActiveMode.args = {
+    selected: true,
+    setRating: callback,
+}
+export const StarNotActiveMode = Template.bind({})
+StarNotActiveMode.args = {
+    selected: false,
+    setRating: callback,
+}
 export const EditableModeStar = Template.bind({})
 EditableModeStar.args = {
     selected: true,
-    setRating: () => undefined,
+    setRating: callback,
 }

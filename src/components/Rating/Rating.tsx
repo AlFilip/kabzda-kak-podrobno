@@ -7,7 +7,7 @@ export type StarType = {
 
 export type RatingValueType = 1 | 2 | 3 | 4 | 5
 
-type RatingType = {
+export type RatingType = {
     rating: RatingValueType
     setRating: (rating: RatingValueType) => void
 }
