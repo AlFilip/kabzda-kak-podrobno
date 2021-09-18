@@ -1,13 +1,22 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-import {Meta} from '@storybook/react';
+import {Meta, Story} from '@storybook/react';
 
-import {Accordion, AccordionBody} from './Accordion';
-import {action} from "@storybook/addon-actions";
+import {Accordion, AccordionBody, AccordionBodyType} from './Accordion';
 
 export default {
     component: Accordion,
     title: 'Components/Accordion',
 } as Meta;
 
-export const AccordionBodyNotCollapsedMode = () => <AccordionBody />
+const callback = (id: any) => alert(`${id.title} was clicked...`)
+
+const Template: Story<AccordionBodyType> = args => <AccordionBody {...args}/>
+
+export const AccordionBodyNotCollapsedMode = Template.bind({})
+AccordionBodyNotCollapsedMode.args = {
+    items: [
+        {value: 'Alex', title: 'Alex'}, {value: 'Alex', title: 'Sergey'}, {value: 'Alex', title: 'Kolyan'},
+    ],
+    callBack: callback,
+}

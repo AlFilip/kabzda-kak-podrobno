@@ -19,6 +19,9 @@ export default {
         setCollapsed: {
             ...getCategory('callbacks')
         },
+        accordionBodyCallBack: {
+            ...getCategory('callbacks')
+        },
         color: {
             control: 'color',
             ...getCategory('Not required (Black as default)'),
@@ -26,24 +29,33 @@ export default {
     },
 } as Meta;
 
-const callback = action('Click')
+const callback = () => action('Click')
+const accordionBodyCallBack = (id: any) => alert(`${id.title} was clicked...`)
 
 const Template: Story<AccordionType> = (args) => <Accordion {...args}/>
 
+const AccordionDefaultArgs = {
+    title: 'Заголовок',
+    color: 'black',
+    items: [
+        {value: 'Alex', title: 'Alex'}, {value: 'Alex', title: 'Sergey'}, {value: 'Alex', title: 'Kolyan'},
+    ],
+    accordionBodyCallBack: accordionBodyCallBack,
+
+}
+
 export const CollapsedMode = Template.bind({})
 CollapsedMode.args = {
-    title: 'Заголовок',
+    ...AccordionDefaultArgs,
     collapsed: true,
     setCollapsed: callback,
-    color: 'black',
 }
 
 export const NotCollapsedMode = Template.bind({})
 NotCollapsedMode.args = {
-    title: 'Заголовок',
+    ...AccordionDefaultArgs,
     collapsed: false,
     setCollapsed: callback,
-    color: 'black',
 }
 
 export const ChangingMode: Story<AccordionType> = (args) => {
@@ -51,6 +63,5 @@ export const ChangingMode: Story<AccordionType> = (args) => {
     return <Accordion {...args} setCollapsed={() => setCollapsed(!collapsed)} collapsed={collapsed}/>
 }
 ChangingMode.args = {
-    title: 'Заголовок',
-    color: 'black'
+    ...AccordionDefaultArgs,
 }
