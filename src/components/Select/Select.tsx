@@ -30,8 +30,14 @@ export function Select(props: SelectType) {
         } else if (!collapsed && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
             for (let i = 0; i < props.items.length; i++){
                 if (props.items[i].value === hoveredItemValue){
-                    e.key === 'ArrowUp' && i > 0 && setHoveredItemValue(props.items[i-1].value)
-                    e.key === 'ArrowDown' && i < props.items.length - 1 && setHoveredItemValue(props.items[i+1].value)
+                    if (e.key === 'ArrowUp' && i > 0){
+                        setHoveredItemValue(props.items[i-1].value)
+                        return
+                    }
+                    if (e.key === 'ArrowDown' && i < props.items.length - 1) {
+                        setHoveredItemValue(props.items[i + 1].value)
+                        return
+                    }
                 }
             }
         }

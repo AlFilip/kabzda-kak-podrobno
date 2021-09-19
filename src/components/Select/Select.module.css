@@ -32,7 +32,7 @@
 .select.exposed {
     position: absolute;
     border: 1px solid var(--select-options-border-shallow);
-    box-shadow: 0 4px 6px var(--select-options-border-shallow);
+    box-shadow: 0 2px 6px var(--select-options-border-shallow);
 }
 
 div.select li {
