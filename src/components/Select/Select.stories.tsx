@@ -25,4 +25,3 @@ const Template: Story<SelectType> = args => {
 }
 
 export const SelectExample = Template.bind({})
-SelectExample.args = {}

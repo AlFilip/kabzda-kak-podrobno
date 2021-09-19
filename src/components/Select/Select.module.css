@@ -6,14 +6,7 @@
     --select-options-border-shallow: #bbbbbb;
 }
 
-div li {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.selectWrapper{
+.selectWrapper {
     height: 2rem;
     outline: none;
 }
@@ -36,23 +29,35 @@ div li {
     background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
 
-.select.exposed{
+.select.exposed {
     position: absolute;
-    border: 1px solid var(--select-options-border);
-    box-shadow: 0 5px 7px var(--select-options-border);
+    border: 1px solid var(--select-options-border-shallow);
+    box-shadow: 0 4px 6px var(--select-options-border-shallow);
+}
+
+div.select li {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .value {
     height: 1.4rem;
     padding: 0.25rem 1rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 500;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 1px solid rgba(30, 167, 253, 0.6);
 }
 
-.select div.value span{
+.value.noValue {
+    justify-content: flex-end;
+}
+
+.select div.value span {
+    justify-self: flex-end;
     padding-top: 0.2rem;
     padding-right: 0.2rem;
     width: 1rem;
@@ -64,7 +69,7 @@ div li {
 
 }
 
-.select div.value span.exposed{
+.select div.value span.exposed {
     padding: 0;
     align-items: flex-end;
     transform: rotate(270deg);
@@ -77,9 +82,14 @@ div li {
 
 .optionItem {
     padding: 0.25rem 1rem;
+    border-top: 1px solid rgba(186, 186, 186, 0.2);
 }
 
-.selectedItem{
+.optionItem span {
+    transform: rotate(90deg);
+}
+
+.selectedItem {
     color: #fff;
     background-color: #1ea7fd;
 }

@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import s from './Select.module.css'
 
-type SelectItemType = { value: any, title: string }
+type SelectItemType = { value: string, title: string }
 
 export type SelectType = {
     value?: string
     items: SelectItemType[]
-    callBack: (value: any) => void
+    callBack: (value: string) => void
 }
 
 export function Select(props: SelectType) {
@@ -17,50 +17,48 @@ export function Select(props: SelectType) {
 
     const currentItem = props.items.find(f => f.value === props.value)
     const currentTitle = currentItem ? currentItem.title : ''
-    const [hoveredItem, setHoveredItem] = useState(currentItem ? currentItem.value : '')
-    const getLiClass = (m: SelectItemType) => {
-        return `${s.optionItem} ${hoveredItem === m.value  ? s.selectedItem : ''}`
+    const [hoveredItemValue, setHoveredItemValue] = useState(currentItem ? currentItem.value : '')
+
+    const getOptionItemClassName = (m: SelectItemType) => {
+        return `${s.optionItem} ${hoveredItemValue === m.value ? s.selectedItem : ''}`
     }
 
-    const options = props.items.map(m => <li className={getLiClass(m)}
-                                             key={m.value}
-                                             onMouseEnter={() =>setHoveredItem(m.value)}
-                                             onClick={() => {
-                                                 props.callBack(m.value)
-                                                 setCollapsed(true)
-                                             }}>{m.title} {hoveredItem === m.value && <span>⁐</span>} </li>)
     const onKeyPress = (e: React.KeyboardEvent) => {
-        console.log(e.key);
-        if (!collapsed) {
-            let value
-            switch (e.key) {
-                case 'ArrowUp':
-                    value =props.value && +props.value > 1 ? `${+props.value - 1}` : (props.items.length).toString()
-                    props.callBack(value)
-                    setHoveredItem(value)
-                    break
-                case 'ArrowDown':
-                    value = props.value && +props.value < props.items.length ? `${+props.value + 1}` : '1'
-                    props.callBack(value)
-                    setHoveredItem(value)
-                    break
-                case 'Enter':
-                    toggleCollapsed()
-                    break
+        if (e.key === 'Enter') {
+            props.callBack(hoveredItemValue)
+            toggleCollapsed()
+        } else if (!collapsed && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+            for (let i = 0; i < props.items.length; i++){
+                if (props.items[i].value === hoveredItemValue){
+                    e.key === 'ArrowUp' && i > 0 && setHoveredItemValue(props.items[i-1].value)
+                    e.key === 'ArrowDown' && i < props.items.length - 1 && setHoveredItemValue(props.items[i+1].value)
+                }
             }
         }
     }
 
+    const selectClassName = `${s.select} ${!collapsed ? s.exposed : ''}`
+    const valueClassName = `${s.value} ${props.value ? '' : s.noValue}`
+    const valueSpanClassName = !collapsed ? s.exposed : ''
+
+    const options = props.items.map(m => <li className={getOptionItemClassName(m)}
+                                             key={m.value}
+                                             onMouseEnter={() => setHoveredItemValue(m.value)}
+                                             onClick={() => {
+                                                 props.callBack(m.value)
+                                                 setCollapsed(true)
+                                             }}>{m.title} {hoveredItemValue === m.value &&
+    <span>&lsaquo;&rsaquo;</span>} </li>)
+
     return (
         <div className={s.selectWrapper} onKeyDown={onKeyPress} tabIndex={0}>
-            <div className={`${s.select} ${!collapsed ? s.exposed : ''}`}>
-                <div className={s.value} onClick={toggleCollapsed}>
+            <div className={selectClassName}>
+                <div className={valueClassName} onClick={toggleCollapsed}>
                     {currentTitle}
-                    <span className={!collapsed ? s.exposed : ''}>›</span>
+                    <span className={valueSpanClassName}>›</span>
                 </div>
                 {!collapsed && <div className={s.options}>{options}</div>}
             </div>
         </div>
     )
 }
-
