@@ -9,7 +9,7 @@ export type RatingValueType = 1 | 2 | 3 | 4 | 5
 
 export type RatingType = {
     rating: RatingValueType
-    setRating: (rating: RatingValueType) => void
+    callBack: (rating: RatingValueType) => void
 }
 
 type StarsElementsType = Array<JSX.Element>
@@ -18,7 +18,7 @@ export function Rating(props: RatingType): JSX.Element {
     const getStars = (ratingCount: RatingValueType): StarsElementsType => {
         const stars: StarsElementsType = []
         for (let i: RatingValueType = 1; i <= ratingCount; i++) {
-            stars.push(<Star selected={props.rating >= i} key={i} setRating={() => props.setRating(i)}/>)
+            stars.push(<Star selected={props.rating >= i} key={i} setRating={() => props.callBack(i)}/>)
         }
         return stars
     }

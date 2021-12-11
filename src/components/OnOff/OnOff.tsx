@@ -2,10 +2,10 @@ import React from "react";
 
 export type OnOffType = {
     isOn: boolean
-    setOn: (value:boolean) => void
+    callback: (value:boolean) => void
 }
 
-function OnOff ({isOn, setOn}: OnOffType):JSX.Element {
+function OnOff ({isOn, callback}: OnOffType):JSX.Element {
 
     const onStyle = {
         display: 'inline-block',
@@ -33,8 +33,8 @@ function OnOff ({isOn, setOn}: OnOffType):JSX.Element {
 
     return (
         <div>
-            <span onClick={()=> setOn(true)} style={onStyle}>On</span>
-            <span onClick={()=> setOn(false)} style={offStyle}>Off</span>
+            <span onClick={()=> callback(true)} style={onStyle}>On</span>
+            <span onClick={()=> callback(false)} style={offStyle}>Off</span>
             <span style={indicatorStyle}> </span>
         </div>
     )
