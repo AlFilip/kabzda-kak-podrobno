@@ -9,6 +9,7 @@ import {reducer, SET_RATING, SET_SELECT_VALUE, TOGGLE_ACCORDION_COLLAPSED, TOGGL
 
 type TitleType = { title: string }
 
+// dsfs
 
 function App() {
     const [state, dispatch] = useReducer(reducer, {
